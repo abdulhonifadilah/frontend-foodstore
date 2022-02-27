@@ -31,7 +31,7 @@ let initialState = {
     image: "",
   },
   imagePreview: "",
-  pagination: { totalPage: 0, postPerPage: 2,currentPage:1, lastPost: 0, firstPost: 0 },
+  pagination: { totalPage: 0, postPerPage: 10,currentPage:1, lastPost: 0, firstPost: 0 },
   error: false,
   status: false,
 };

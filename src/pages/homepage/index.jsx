@@ -18,7 +18,7 @@ export default function Homepage() {
   let { tag, data, form, pagination } = useSelector((state) => state.product);
   const getProduct = useCallback(() => {
     dispatch(getProducts(form));
-  }, [dispatch, form]);  
+  }, [dispatch, form]);
 
   useEffect(() => {
     getProduct();
@@ -26,9 +26,9 @@ export default function Homepage() {
     dispatch(getTags());
   }, [dispatch, form, getProduct]);
   const totalData = data.length; //panjang data seluruhnya
-  const lastPost=pagination.currentPage*pagination.postPerPage
-  const firstPost=lastPost-pagination.postPerPage;
-  const totalPage=Math.ceil(totalData/pagination.postPerPage);
+  const lastPost = pagination.currentPage * pagination.postPerPage;
+  const firstPost = lastPost - pagination.postPerPage;
+  const totalPage = Math.ceil(totalData / pagination.postPerPage);
   useEffect(() => {
     return () => {
       getProduct();
@@ -36,7 +36,7 @@ export default function Homepage() {
   }, [form, form.tags.length, getProduct]);
 
   return (
-    <>
+    <div className="flex flex-col justify-between">
       <div className="container">
         <header className="flex justify-center flex-col items-center mt-20">
           <div className="text-center font-bold">
@@ -64,35 +64,39 @@ export default function Homepage() {
         <section className="list-product mt-14">
           <h5 className="font-bold text-3xl">Product</h5>
           <div className="flex mt-8 gap-5">
-            <div className="flex">
-              <label htmlFor="">
-                Category <ListCategory />
-              </label>
-            </div>
-            <div className="tags">
-              <p>Tags :</p>
-              <ul className="flex flex-row gap-1">
-                {tag.map((e, i) => {
-                  return (
-                    <li key={i}>
-                      <CheckedTags name={e.name} />
-                    </li>
-                  );
+                <div className="flex">
+                  <label htmlFor="">
+                    Category <ListCategory />
+                  </label>
+                </div>
+                <div className="tags">
+                  <p>Tags :</p>
+                  <ul className="flex flex-row gap-1">
+                    {tag.map((e, i) => {
+                      return (
+                        <li key={i}>
+                          <CheckedTags name={e.name} />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+          {data.length ? (
+            <>
+              <div className="mt-6 flex flex-wrap gap-3 mb-2">
+                {data.slice(firstPost, lastPost).map((e, i) => {
+                  return <Card data={e} name={e.category.nama} key={i} />;
                 })}
-              </ul>
-            </div>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-3 mb-2">
-            {data
-              .slice(firstPost, lastPost)
-              .map((e, i) => {
-                return <Card data={e} name={e.category.nama} key={i} />;
-              })}
-          </div>
-          {totalPage > 1 && <Pagination totalPage={totalPage} />}
+              </div>
+              {totalPage > 1 && <Pagination totalPage={totalPage} />}
+            </>
+          ) : (
+            <p className="text-red-500 mt-5 underline">Product Kosong</p>
+          )}
         </section>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

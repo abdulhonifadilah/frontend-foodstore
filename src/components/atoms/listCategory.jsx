@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilter } from "../../app/features/product/actions";
+import { setForm } from "../../app/features/product/actions";
 
 export default function ListCategory() {
-  const { category,filter } = useSelector((state) => state.product);
+  const { category ,form} = useSelector((state) => state.product);
   const [Open, setOpen] = useState(false);
   const dispatch = useDispatch();
   return (
@@ -18,7 +18,7 @@ export default function ListCategory() {
               }}
               className="flex justify-between w-full items-center px-1 py-0.5 capitalize h-7"
             >
-              {filter.category}
+              {form.category}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4 ml-auto"
@@ -48,7 +48,7 @@ export default function ListCategory() {
                       className={`py-0.5 px-1 items-center flex justify-end w-full capitalize`}
                       onClick={() => {
                         setOpen(false);
-                        dispatch(setFilter("category", ""));
+                        dispatch(setForm("category", ""));
                       }}
                     >
                       Pilih Categeory
@@ -64,7 +64,7 @@ export default function ListCategory() {
                       className={`py-0.5 px-1 items-center flex justify-end w-full capitalize`}
                       onClick={() => {
                         setOpen(false);
-                        dispatch(setFilter("category", e.name));
+                        dispatch(setForm("category", e.name));
                       }}
                     >
                       {e.name}

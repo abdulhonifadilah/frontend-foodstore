@@ -18,34 +18,34 @@ export default function Input(props) {
 
 export function CheckedTags(props) {
   const dispatch = useDispatch();
-  const { filter } = useSelector((state) => state.product);
+  const { form } = useSelector((state) => state.product);
   const [ischecked, setIsChecked] = useState(false);
   
   const setChecked = useCallback(() => {
-    if (filter.tags.includes(props.name)) {
+    if (form.tags.includes(props.name)) {
       setIsChecked(true);
     }else{
       setIsChecked(false)
     } 
-  }, [filter.tags, props.name]);
+  }, [form, props.name]);
 
   useEffect(() => {
     setChecked();
   }, [ setChecked]);
   const handleToggleTags = (val) => {
     setIsChecked(!ischecked);
-    let arrTags = filter.tags.indexOf(val);
+    let arrTags = form.tags.indexOf(val);
     if (arrTags !== -1) {
-      filter.tags.splice(arrTags, 1);
+      form.tags.splice(arrTags, 1);
     } else {
-      filter.tags.push(val);
+      form.tags.push(val);
     }
   };
 useEffect(() => {
   return () => {
-    dispatch(setForm("tags", filter.tags))
+    dispatch(setForm("tags", form.tags))
   }
-}, [dispatch, filter.tags, filter.tags.length])
+}, [dispatch, form.tags, form.tags.length])
 
   return (
     <>

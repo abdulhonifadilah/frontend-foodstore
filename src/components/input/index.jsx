@@ -145,7 +145,7 @@ export function InputProduct(props) {
   const cb = useCallback(() => {
     dispatch(getCategories());
     dispatch(getTags());
-    if (id.length > 0) {
+    if (id.length) {
       setlabel("edit");
     } else {
       setlabel("tambah");
