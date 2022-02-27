@@ -1,23 +1,69 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import Homepage from "./pages/homepage";
+import Cart from "./pages/cart";
+import Navbar from "./components/nav";
+import Profil from "./pages/profil";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import PrivateRoute from "./router/privateRoute";
+import Dasboard from "./pages/dasboard";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function App() {
+  const { role, loggedIn } = useSelector((state) => state.auth);
+  let location = useLocation();
+  useEffect(() => {
+    if (role === "admin" && loggedIn) {
+      <Navigate to="/dasboard" state={{ from: location }} replace />;
+    }
+  }, [location, loggedIn, role]);
+
+  function Home({ children }) {
+    if (role === "admin" && loggedIn) {
+      return <Navigate to="/dasboard" state={{ from: location }} replace />;
+    }
+    return children;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ backgroundColor: "#C4DCC2", minHeight: "100vh" }}>
+      {(role==='user' || !loggedIn) && <Navbar />}
+      <Routes>
+        <Route
+          element={
+            <Home>
+              <Homepage />
+            </Home>
+          }
+          path="/"
+          exact
+        />
+        <Route
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+          path="/cart"
+        />
+        <Route
+          element={
+            <PrivateRoute>
+              <Profil />
+            </PrivateRoute>
+          }
+          path="/profil"
+        />
+        <Route element={<Login />} path="/login" />
+        <Route element={<Register />} path="/register" />
+        <Route element={<Dasboard />} path="/dasboard" />
+      </Routes>
     </div>
   );
 }

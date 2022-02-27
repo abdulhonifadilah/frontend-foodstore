@@ -1,0 +1,15 @@
+export const GET_CATEGORY = 'GET_CATEGORY';
+export const GET_TAG ='GET_TAG';
+export const GET_PRODUCT = 'GET_PRODUCT';
+export const CREATE_PRODUCT = 'CREATE_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const FILTER_PRODUCT = 'FILTER_PRODUCT';
+export const CREATE_CATEGORY = 'CREATE_CATEGORY';
+export const LOADING ='LOADING';
+export const SUCCESS = 'SUCCESS';
+export const SET_FORM = 'SET_FORM';
+export const IMAGE_PREVIEW = 'IMAGE_PREVIEW';
+export const SET_ID='SET_ID';
+export const SET_FORM_DEFAULT= 'SET_FORM_DEFAULT';
+export const SET_PAGINATION = 'SET_PAGINATION';
