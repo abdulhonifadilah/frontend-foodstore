@@ -17,18 +17,34 @@ import {
   updateProduct,
 } from "../../app/features/product/actions";
 import ListCategory from "../atoms/listCategory";
+import * as Validator from "validatorjs";
 
 export function InputCategory(props) {
-  let { form,  id} = useSelector((state) => state.product);
+  let { form, id } = useSelector((state) => state.product);
   const [label, setlabel] = useState("tambah");
   const dispatch = useDispatch();
   function handleSubmit(e) {
     e.preventDefault();
-    if (label === "edit") {
-      dispatch(updateCategories(id,form));
-    } else {
-      dispatch(createCategories(form));
-    }
+    let rules = {
+      name: "required",
+    };
+
+    let validation = new Validator(form, rules, {
+      required: {
+        string: ":attribute harus di isi",
+      },
+    });
+
+    validation.passes(() => {
+      if (id.length > 0) {
+        dispatch(updateCategories(id, form));
+      } else {
+        dispatch(createCategories(form));
+      }
+    }); // true
+
+    validation.fails(() => window.alert("data harus di isi")); // false
+
     // console.log(form.id.length)
   }
   const cb = useCallback(() => {
@@ -78,20 +94,33 @@ export function InputCategory(props) {
   );
 }
 export function InputTag(props) {
-  let { form,  id } = useSelector((state) => state.product);
+  let { form, id } = useSelector((state) => state.product);
   const [label, setlabel] = useState("tambah");
   const dispatch = useDispatch();
   function handleSubmit(e) {
     e.preventDefault();
-    if (id.length > 0) {
-      dispatch(updateTags(id,form));
-    } else {
-      dispatch(createTags(form));
-    }
-    // console.log(form.id.length)
+    let rules = {
+      name: "required",
+    };
+
+    let validation = new Validator(form, rules, {
+      required: {
+        string: ":attribute harus di isi",
+      },
+    });
+
+    validation.passes(() => {
+      if (id.length > 0) {
+        dispatch(updateTags(id, form));
+      } else {
+        dispatch(createTags(form));
+      }
+    }); // true
+
+    validation.fails(() => window.alert("data harus di isi")); // false
   }
   const cb = useCallback(() => {
-   if (id.length > 0) {
+    if (id.length > 0) {
       setlabel("edit");
     } else {
       setlabel("tambah");
@@ -159,27 +188,41 @@ export function InputProduct(props) {
   const onImageUpload = (e) => {
     let file = e.target.files[0];
     dispatch(setForm("image", file));
-    dispatch(setImagePreview(URL.createObjectURL(file)))
+    dispatch(setImagePreview(URL.createObjectURL(file)));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (id.length > 0) {
-      dispatch(updateProduct(id,form));
-    } else{
-      dispatch(createProduct(form));
-    }
+    let rules = {
+      name: "required",
+      price: "required",
+      category: "required",
+      tags: "required",
+    };
+
+    let validation = new Validator(form, rules, {
+      required: {
+        string: ":attribute harus di isi",
+      },
+    });
+
+    validation.passes(() => {
+      // dispatch(userRegister(form))
+      if (id.length > 0) {
+        dispatch(updateProduct(id, form));
+      } else {
+        dispatch(createProduct(form));
+      }
+    }); // true
+
+    validation.fails(() => window.alert("data harus di isi")); // false
   };
   return (
     <div className="flex flex-col">
       <h3 className="mb-2 text-xl font-semibold capitalize">{label}</h3>
       <div className="flex justify-start gap-3 flex-wrap">
         <div className="flex flex-col gap-1">
-          <img
-            src={imagePreview}
-            alt=""
-            className="w-20 h-20 bg-gray-200"
-          />
+          <img src={imagePreview} alt="" className="w-20 h-20 bg-gray-200" />
           <input
             type="file"
             name=""
@@ -212,7 +255,6 @@ export function InputProduct(props) {
             cols="25"
             rows="5"
             value={form.description}
-
             onChange={(e) => dispatch(setForm("description", e.target.value))}
           ></textarea>
         </div>
@@ -236,9 +278,14 @@ export function InputProduct(props) {
         <div className="flex mt-auto gap-2 items-center">
           <Btn onClick={handleSubmit} color="bg-blue-500" label="Simpan" />
           {label === "edit" && (
-            <p  onClick={() => {
-              dispatch(setFormDefault());
-            }} className="capitalize hover:underline cursor-pointer">Tambah</p>
+            <p
+              onClick={() => {
+                dispatch(setFormDefault());
+              }}
+              className="capitalize hover:underline cursor-pointer"
+            >
+              Tambah
+            </p>
           )}
         </div>
       </div>

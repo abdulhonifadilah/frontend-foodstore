@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userRegister } from "../../app/features/auth/actions";
+import * as Validator from "validatorjs";
 
 let form = {
   full_name: "",
@@ -14,6 +15,7 @@ export default function Register() {
   const dispatch = useDispatch();
   const loggedIn = useSelector(state => state.auth.loggedIn);
   const navigate = useNavigate();
+  const [message, setmessage] = useState([])
   useEffect(() => {
     if(loggedIn){
      navigate("/")
@@ -21,7 +23,35 @@ export default function Register() {
   }, [loggedIn, navigate]);
   function handleSubmit(e) {
     e.preventDefault();
+    let rules = {
+      full_name: "required",
+      email: "required|email",
+      password: "required|min:8",
+    };
+
+    let validation = new Validator(form, rules, {
+      required: {
+        string: ":attribute harus di isi",
+      },
+      email: {
+        string: "email ada yang salah",
+      },
+      min: {
+        string: ":attribute minimal :min kata",
+      },
+    });
+
+    validation.passes(() =>
     dispatch(userRegister(form))
+    ); // true
+
+    validation.fails(() => 
+        setmessage([
+          ...validation.errors.get("nama"),
+          ...validation.errors.get("email"),
+          ...validation.errors.get("password"),
+        ])
+    ); // false
   }
 
   return (
@@ -30,6 +60,8 @@ export default function Register() {
         <h5 className="font-bold w-full text-center pt-3 text-2xl">
           <span className="text-red-500">Re</span>gister
         </h5>
+        <p className="w-full text-center text-red-500">{message[0]}</p>
+
         <form onSubmit={handleSubmit} action="" className="flex flex-col px-3 py-5">
           <label htmlFor="">Nama Lengkap</label>
           <input

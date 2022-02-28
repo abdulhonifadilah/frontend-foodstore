@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import {setForm} from "../../app/features/product/actions"
 
 export default function Input(props) {
   return (
@@ -17,21 +15,16 @@ export default function Input(props) {
 }
 
 export function CheckedTags(props) {
-  const dispatch = useDispatch();
   const { form } = useSelector((state) => state.product);
   const [ischecked, setIsChecked] = useState(false);
   
-  const setChecked = useCallback(() => {
+  useEffect(() => {
     if (form.tags.includes(props.name)) {
       setIsChecked(true);
     }else{
       setIsChecked(false)
     } 
-  }, [form, props.name]);
-
-  useEffect(() => {
-    setChecked();
-  }, [ setChecked]);
+  }, [form.tags, props.name]);
   const handleToggleTags = (val) => {
     setIsChecked(!ischecked);
     let arrTags = form.tags.indexOf(val);
@@ -41,11 +34,6 @@ export function CheckedTags(props) {
       form.tags.push(val);
     }
   };
-useEffect(() => {
-  return () => {
-    dispatch(setForm("tags", form.tags))
-  }
-}, [dispatch, form.tags, form.tags.length])
 
   return (
     <>
