@@ -8,8 +8,8 @@ import {
   setFormAddress,
   setIdAddresses,
 } from "../../app/features/address/actions";
-import AddAddress from "../addaddress";
 import { Btn } from "../atoms/button";
+import { InputAddress } from "../input";
 
 export default function Address() {
   const [show, setShow] = useState(false);
@@ -34,7 +34,7 @@ export default function Address() {
       <h1 className="font-semibold text-xl mb-3">Address</h1>
       {show ? (
         <>
-          <AddAddress setShow={setShow} />
+          <InputAddress setShow={setShow} />
         </>
       ) : (
         <>
@@ -42,7 +42,6 @@ export default function Address() {
             onClick={() => {
               setShow(true);
               dispatch(setIdAddresses(""));
-
             }}
             className="px-2 py-1 bg-red-500 mb-2 text-white font-semibold rounded-md mr-auto hover:opacity-80 hover:shadow-md"
           >

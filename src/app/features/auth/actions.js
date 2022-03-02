@@ -8,7 +8,7 @@ export const userLogin = (payload) => ({
 
 export const userLoggedIn = (data) => {
   return async (dispatch) => {
-    await axios.post('http://localhost:3000/auth/login', data).then((res) => {
+    await axios.post('https://backend-foodstore.herokuapp.com/auth/login', data).then((res) => {
       let { data } = res;
       if (data.error) {
         window.alert(data.message);
@@ -29,7 +29,7 @@ export const userRegister=(data)=>{
     dispatch({
       type: REQUEST_REGISTER
     })
-    await axios.post('http://localhost:3000/auth/register', data).then(()=>{
+    await axios.post('https://backend-foodstore.herokuapp.com/auth/register', data).then(()=>{
       dispatch({
         type:USER_REGISTER
       })
@@ -41,7 +41,7 @@ export const userRegister=(data)=>{
 export const userLogout = () => {
   return async (dispatch) => {
     let {token} = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : {};
-    await axios.post('http://localhost:3000/auth/logout', null ,{
+    await axios.post('https://backend-foodstore.herokuapp.com/auth/logout', null ,{
         headers:{
             authorization : `Bearer ${token}`
         }

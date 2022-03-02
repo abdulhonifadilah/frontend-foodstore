@@ -17,7 +17,7 @@ export default function CartItem(data) {
     <>
       <div className="border-b bg-white">
         <div className="flex flex-row items-center pr-2 border-b-2 border-gray-300">
-          <img src={`http://localhost:3000/images/products/${val.image_url}`} alt="gambar" className="w-32 h-32 mr-5 bg-gray-200" />
+          <img src={`https://backend-foodstore.herokuapp.com/images/products/${val.image_url}`} alt="gambar" className="w-32 h-32 mr-5 bg-gray-200" />
           <div className="w-72">
             <ul>
               <li>

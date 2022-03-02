@@ -5,6 +5,7 @@ import { getAddresses } from "../../app/features/address/actions";
 import CartItem from "../../components/cartitem";
 import { createOrders, setFormOrder } from "../../app/features/order/actions";
 import { Btn } from "../../components/atoms/button";
+import Navbar from "../../components/nav";
 
 export default function Cart() {
   let dispatch = useDispatch();
@@ -25,12 +26,12 @@ export default function Cart() {
   }, [address.status, dispatch]);
 
   return (
-    <>
+    <Navbar>
       <div className="container">
         <div className="flex justify-center flex-col items-center mt-8">
           <h3 className="font-bold text-3xl">Cart</h3>
-          {cart.data.length ? (
-            <div className="flex flex-col mt-6">
+          {cart.data.length > 0 ? (
+            <div className={`flex flex-col mt-6 ${!cart.status && 'cursor-wait'}`}>
               {cart.data.map((e, i) => {
                 return <CartItem data={e} key={i} />;
               })}
@@ -125,6 +126,6 @@ export default function Cart() {
           )}
         </div>
       </div>
-    </>
+    </Navbar>
   );
 }

@@ -14,7 +14,7 @@ export const createOrders = (data) => {
       : {};
     dispatch({ type: LOADING });
     await axios
-      .post("http://localhost:3000/api/orders", data, {
+      .post("https://backend-foodstore.herokuapp.com/api/orders", data, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -38,7 +38,7 @@ export const getOrders = () => {
       : {};
     dispatch({ type: LOADING });
     await axios
-      .get(`http://localhost:3000/api/orders`, {
+      .get(`https://backend-foodstore.herokuapp.com/api/orders`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -58,7 +58,7 @@ export const getOrdersById = (id) => {
       : {};
     // dispatch({ type: LOADING });
     await axios
-      .get(`http://localhost:3000/api/orders/${id}`, {
+      .get(`https://backend-foodstore.herokuapp.com/api/orders/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -79,7 +79,7 @@ export const getInvoices = () => {
       : {};
     dispatch({ type: LOADING });
     await axios
-      .get(`http://localhost:3000/api/invoices`, {
+      .get(`https://backend-foodstore.herokuapp.com/api/invoices`, {
         headers: {
           authorization: `Bearer ${token}`,
         },

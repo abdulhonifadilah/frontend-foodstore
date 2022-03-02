@@ -111,7 +111,7 @@ export const setFormAddress = (formValue, formData) => {
 export const setIdAddresses = (payload) => {
     return { type: SET_ID, payload };
   };
-  export const setFormDefault = (payload) => {
+  export const setFormAddressDefault = (payload) => {
     return { type: SET_FORM_DEFAULT };
   };
 export const getProv = () => {

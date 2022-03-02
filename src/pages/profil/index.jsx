@@ -5,6 +5,7 @@ import Invoice from "../../components/invoice";
 import DetailProfil from "../../components/profil";
 import { userLogout } from "../../app/features/auth/actions";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/nav";
 
 const sidebar = [
   {
@@ -37,7 +38,8 @@ export default function Profil() {
     }
   };
   return (
-    <div className="container flex mt-14 justify-center">
+    <Navbar>
+      <div className="container flex mt-14 justify-center">
       <div className="flex bg-white p-5">
         <ul className="mr-5">
           {sidebar.map((e, i) => {
@@ -54,5 +56,7 @@ export default function Profil() {
         <div className="w-[40rem]">{main}</div>
       </div>
     </div>
+    </Navbar>
+    
   );
 }

@@ -29,7 +29,7 @@ export default function Invoice() {
           </tr>
         </thead>
         <tbody className="border-b">
-          {invoice.map((e, i) => {
+          {invoice.length > 0 && invoice.map((e, i) => {
             return (
               <tr key={i}>
                 <td>
@@ -37,9 +37,6 @@ export default function Invoice() {
                     onClick={() => {
                       dispatch(getOrdersById(e.order._id));
                       setDetail(!detail);
-                      // console.log(e);
-                      // console.log(e.order._id)
-                      // console.log(order)
                     }}
                   >
                     +

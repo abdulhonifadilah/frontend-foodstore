@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLoggedIn } from "../../app/features/auth/actions";
+import Navbar from "../../components/nav";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -21,7 +22,8 @@ export default function Login() {
     dispath(userLoggedIn({email, password}))
   };
   return (
-    <div className="flex w-full mt-20 justify-center items-center">
+    <Navbar>
+      <div className="flex w-full mt-20 justify-center items-center">
       <div className="flex flex-col w-[25rem] my-auto bg-white rounded-md shadow-md">
         <h5 className="font-bold w-full text-center pt-3 text-2xl">
           <span className="text-red-500">Lo</span>gin
@@ -50,5 +52,7 @@ export default function Login() {
         </form>
       </div>
     </div>
+    </Navbar>
+    
   );
 }

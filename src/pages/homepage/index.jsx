@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect } from "react";
 import Card from "../../components/card";
-import Footer from "../../components/footer";
 import { useDispatch } from "react-redux";
 import {
   getCategories,
   getProducts,
   getTags,
-  setFilter,
+  setForm,
 } from "../../app/features/product/actions";
 import { useSelector } from "react-redux";
 import ListCategory from "../../components/atoms/listCategory";
 import { CheckedTags } from "../../components/atoms/input";
 import Pagination from "../../components/pagination";
+import Navbar from "../../components/nav";
 
 export default function Homepage() {
   const dispatch = useDispatch();
@@ -29,14 +29,10 @@ export default function Homepage() {
   const lastPost = pagination.currentPage * pagination.postPerPage;
   const firstPost = lastPost - pagination.postPerPage;
   const totalPage = Math.ceil(totalData / pagination.postPerPage);
-  useEffect(() => {
-    return () => {
-      getProduct();
-    };
-  }, [form, form.tags.length, getProduct]);
 
   return (
-    <div className="flex flex-col justify-between">
+    <Navbar>
+      <div className="flex flex-col justify-between">
       <div className="container">
         <header className="flex justify-center flex-col items-center mt-20">
           <div className="text-center font-bold">
@@ -52,7 +48,7 @@ export default function Homepage() {
               placeholder="Cari"
               className="w-60 mr-3 py-1 px-3 focus:outline-none"
               onChange={(e) => {
-                dispatch(setFilter("name", e.target.value));
+                dispatch(setForm("name", e.target.value));
                 getProduct();
               }}
             />
@@ -96,7 +92,8 @@ export default function Homepage() {
           )}
         </section>
       </div>
-      <Footer />
     </div>
+    </Navbar>
+    
   );
 }

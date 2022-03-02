@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { setForm } from "../../app/features/product/actions";
 
 export default function Input(props) {
   return (
@@ -17,7 +19,7 @@ export default function Input(props) {
 export function CheckedTags(props) {
   const { form } = useSelector((state) => state.product);
   const [ischecked, setIsChecked] = useState(false);
-  
+  const dispatch = useDispatch();
   useEffect(() => {
     if (form.tags.includes(props.name)) {
       setIsChecked(true);
@@ -33,6 +35,7 @@ export function CheckedTags(props) {
     } else {
       form.tags.push(val);
     }
+    dispatch(setForm("tags", form.tags));
   };
 
   return (
@@ -43,6 +46,7 @@ export function CheckedTags(props) {
           checked={ischecked}
           name=""
           id=""
+          className="cursor-pointer"
           onChange={() => handleToggleTags(props.name)}
         />
         {props.name}

@@ -11,7 +11,7 @@ export const addToCart = (data) => async (dispatch) => {
     cart.push(data);
     await axios
       .put(
-        `http://localhost:3000/api/carts`,
+        `https://backend-foodstore.herokuapp.com/api/carts`,
         { items: cart },
         {
           headers: {
@@ -39,7 +39,7 @@ export const getToCart = () => async (dispatch) => {
     : {};
 
   await axios
-    .get(`http://localhost:3000/api/carts`, {
+    .get(`https://backend-foodstore.herokuapp.com/api/carts`, {
       headers: {
         authorization: `Bearer ${token}`,
       },

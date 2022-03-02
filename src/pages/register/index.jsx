@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userRegister } from "../../app/features/auth/actions";
 import * as Validator from "validatorjs";
+import Navbar from "../../components/nav"
 
 let form = {
   full_name: "",
@@ -55,7 +56,8 @@ export default function Register() {
   }
 
   return (
-    <div className="flex w-full mt-20 justify-center items-center">
+    <Navbar>
+      <div className="flex w-full mt-20 justify-center items-center">
       <div className="flex flex-col w-[25rem] my-auto bg-white rounded-md shadow-md">
         <h5 className="font-bold w-full text-center pt-3 text-2xl">
           <span className="text-red-500">Re</span>gister
@@ -93,5 +95,7 @@ export default function Register() {
         </form>
       </div>
     </div>
+    </Navbar>
+    
   );
 }

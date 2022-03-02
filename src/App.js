@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div style={{ backgroundColor: "#C4DCC2", minHeight: "100vh" }}>
-      {(role==='user' || !loggedIn) && <Navbar />}
+      {/* {(role==='user' || !loggedIn) && <Navbar />} */}
       <Routes>
         <Route
           element={

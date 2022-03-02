@@ -17,7 +17,7 @@ export const getProducts = (params) => async (dispatch) => {
   try {
     let filter = `q=${params.name}&category=${params.category}`;
     params.tags.map((e) => (filter += `&tags=${e}`));
-    const res = await axios.get(`http://localhost:3000/api/product?${filter}`);
+    const res = await axios.get(`https://backend-foodstore.herokuapp.com/api/product?${filter}`);
     dispatch({
       type: GET_PRODUCT,
       payload: res.data.data,
@@ -56,7 +56,7 @@ export const createProduct = (form) => async (dispatch) => {
     }
 
     await axios
-      .post("http://localhost:3000/api/product", data, {
+      .post("https://backend-foodstore.herokuapp.com/api/product", data, {
         headers: {
           "content-type": "multipart/form-data",
           authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ export const updateProduct = (id, form) => async (dispatch) => {
       data.append("tags", form.tags[i]);
     }
     await axios
-      .put(`http://localhost:3000/api/product/${id}`, data, {
+      .put(`https://backend-foodstore.herokuapp.com/api/product/${id}`, data, {
         headers: {
           "content-type": "multipart/form-data",
           authorization: `Bearer ${token}`,
@@ -114,7 +114,7 @@ export const deleteProduct = (id) => async (dispatch) => {
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
     await axios
-      .delete(`http://localhost:3000/api/product/${id}`, {
+      .delete(`https://backend-foodstore.herokuapp.com/api/product/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -152,7 +152,7 @@ export const setFormDefault = () => {
 };
 export const getCategories = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:3000/api/categories");
+    const res = await axios.get("https://backend-foodstore.herokuapp.com/api/categories");
     dispatch({
       type: GET_CATEGORY,
       payload: res.data,
@@ -169,7 +169,7 @@ export const createCategories = (data) => async (dispatch) => {
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
     await axios
-      .post("http://localhost:3000/api/categories", data, {
+      .post("https://backend-foodstore.herokuapp.com/api/categories", data, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -192,7 +192,7 @@ export const deleteCategories = (id) => async (dispatch) => {
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
     await axios
-      .delete(`http://localhost:3000/api/categories/${id}`, {
+      .delete(`https://backend-foodstore.herokuapp.com/api/categories/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -215,7 +215,7 @@ export const updateCategories = (id, form) => async (dispatch) => {
       : {};
     await axios
       .put(
-        `http://localhost:3000/api/categories/${id}`,
+        `https://backend-foodstore.herokuapp.com/api/categories/${id}`,
         { name: form.name },
         {
           headers: {
@@ -236,7 +236,7 @@ export const updateCategories = (id, form) => async (dispatch) => {
 
 export const getTags = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:3000/api/tags");
+    const res = await axios.get("https://backend-foodstore.herokuapp.com/api/tags");
     dispatch({
       type: GET_TAG,
       payload: res.data,
@@ -253,7 +253,7 @@ export const createTags = (data) => async (dispatch) => {
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
     await axios
-      .post("http://localhost:3000/api/tags", data, {
+      .post("https://backend-foodstore.herokuapp.com/api/tags", data, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -277,7 +277,7 @@ export const updateTags = (id, form) => async (dispatch) => {
       : {};
     await axios
       .put(
-        `http://localhost:3000/api/tags/${id}`,
+        `https://backend-foodstore.herokuapp.com/api/tags/${id}`,
         { name: form.name },
         {
           headers: {
@@ -304,7 +304,7 @@ export const deleteTags = (id) => async (dispatch) => {
       : {};
 
     await axios
-      .delete(`http://localhost:3000/api/tags/${id}`, {
+      .delete(`https://backend-foodstore.herokuapp.com/api/tags/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
