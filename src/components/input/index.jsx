@@ -321,9 +321,9 @@ useEffect(() => {
     }
   }
   return (
-    <><h3 className="text-xl font-semibold capitalize text-left w-full mb-2">{label}</h3>
-      <div className="flex flex-row w-full mb-2 transition-opacity">
-        <div className="flex flex-col w-1/2 gap-2 mr-2">
+    <><h3 className="text-xl font-semibold capitalize text-left md:w-full mb-2 px-6">{label}</h3>
+      <div className="flex flex-col md:flex-row w-full mb-2 transition-opacity">
+        <div className="flex flex-col w-full md:w-1/2 gap-2 mr-2">
           <label htmlFor="nama">
             Nama
             <input
@@ -350,7 +350,7 @@ useEffect(() => {
             ></textarea>
           </label>
         </div>
-        <div className="flex flex-col justify-between gap-2 w-1/2">
+        <div className="flex flex-col justify-between gap-2 w-full md:w-1/2">
           <DropdownProvinsi/>
           <DropdownKotaKab/>
           <DropdownKecamatan/>

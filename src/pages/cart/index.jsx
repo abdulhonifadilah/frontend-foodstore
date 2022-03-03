@@ -28,12 +28,18 @@ export default function Cart() {
   return (
     <Navbar>
       <div className="container">
-        <div className="flex justify-center flex-col items-center mt-8">
+        <div className="flex justify-center flex-col items-center mt-8 px-4">
           <h3 className="font-bold text-3xl">Cart</h3>
           {cart.data.length > 0 ? (
-            <div className={`flex flex-col mt-6 ${!cart.status && 'cursor-wait'}`}>
+            <div
+              className={`flex flex-col mt-6 ${!cart.status && "cursor-wait"}`}
+            >
               {cart.data.map((e, i) => {
-                return <CartItem data={e} key={i} />;
+                return (
+                  <div className="w-full" key={i}>
+                    <CartItem data={e} />
+                  </div>
+                );
               })}
               <div className="flex justify-start mt-3 gap-2">
                 <div className="text-right w-1/4">

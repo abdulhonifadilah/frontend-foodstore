@@ -16,9 +16,6 @@ export default function Address() {
   const dispatch = useDispatch();
   let { data, status } = useSelector((state) => state.address);
   useEffect(() => {
-    dispatch(getAddresses());
-  }, [dispatch]);
-  useEffect(() => {
     return () => {
     dispatch(getAddresses());
     }
@@ -30,7 +27,7 @@ export default function Address() {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center border rounded-md px-2 py-3">
+    <div className="flex flex-col items-center justify-center md:border rounded-md px-4 py-3 w-full">
       <h1 className="font-semibold text-xl mb-3">Address</h1>
       {show ? (
         <>
@@ -47,7 +44,7 @@ export default function Address() {
           >
             Tambah Alamat
           </button>
-          <table className="w-full text-center">
+          <table className="text-center md:w-full w-[40rem]">
             <thead className="border-y-2">
               <tr>
                 <th className="py-2 w-1/3">Nama</th>

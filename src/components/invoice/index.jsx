@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
-  getInvoices,
   getOrdersById,
 } from "../../app/features/order/actions";
 
@@ -11,13 +9,9 @@ export default function Invoice() {
   const [detail, setDetail] = useState(false);
   const dispatch = useDispatch();
   let { invoice, order } = useSelector((state) => state.order);
-  useEffect(() => {
-    dispatch(getInvoices());
-    // dispatch(getOrders());
-  }, [dispatch]);
 
   return (
-    <div className="flex flex-col items-center justify-center border rounded-md px-2 py-3">
+    <div className="flex flex-col items-center justify-center border rounded-md px-2 py-3 md:w-full w-[40rem]">
       <h1 className="font-semibold text-xl mb-3">Invoice</h1>
       <table className="w-full text-center">
         <thead className="font-normal text-gray-800 border-y-2">

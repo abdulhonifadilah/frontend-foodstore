@@ -15,7 +15,9 @@ import Navbar from "../../components/nav";
 
 export default function Homepage() {
   const dispatch = useDispatch();
-  let { tag, data, form, pagination } = useSelector((state) => state.product);
+  let { tag, data, form, pagination, status } = useSelector(
+    (state) => state.product
+  );
   const getProduct = useCallback(() => {
     dispatch(getProducts(form));
     dispatch(getCategories());
@@ -33,7 +35,6 @@ export default function Homepage() {
   return (
     <Navbar>
       <div className="flex flex-col justify-between">
-      <div className="container">
         <header className="flex justify-center flex-col items-center mt-20">
           <div className="text-center font-bold">
             <h1 className="text-6xl">
@@ -57,43 +58,51 @@ export default function Homepage() {
             </button>
           </div>
         </header>
-        <section className="list-product mt-14">
+        <section className="list-product mt-14 px-4 md:px-0">
           <h5 className="font-bold text-3xl">Product</h5>
-          <div className="flex mt-8 gap-5">
-                <div className="flex">
-                  <label htmlFor="">
-                    Category <ListCategory />
-                  </label>
-                </div>
-                <div className="tags">
-                  <p>Tags :</p>
-                  <ul className="flex flex-row gap-1">
-                    {tag.map((e, i) => {
-                      return (
-                        <li key={i}>
-                          <CheckedTags name={e.name} />
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
+          {tag.length > 0 && <div className="flex flex-col md:flex-row mt-8 gap-5">
+            <div className="flex">
+              <label htmlFor="">
+                Category <ListCategory />
+              </label>
+            </div>
+            <div className="tags">
+              <p>Tags :</p>
+              <ul className="flex flex-row gap-1">
+                {tag.map((e, i) => {
+                  return (
+                    <li key={i}>
+                      <CheckedTags name={e.name} />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>}
+          
+          {status ? <>
           {data.length ? (
             <>
-              <div className="mt-6 flex flex-wrap gap-3 mb-2">
+              <div className="mt-6 flex flex-col md:flex-row justify-start mb-2 w-full">
                 {data.slice(firstPost, lastPost).map((e, i) => {
-                  return <Card data={e} name={e.category.nama} key={i} />;
+                  return (
+                    <div
+                      key={i}
+                      className="flex justify-center items-center w-full md:w-1/3 mb-5"
+                    >
+                      <Card data={e} name={e.category.nama} />
+                    </div>
+                  );
                 })}
               </div>
               {totalPage > 1 && <Pagination totalPage={totalPage} />}
             </>
           ) : (
             <p className="text-red-500 mt-5 underline">Product Kosong</p>
-          )}
+          )}</>:<p className="mt-6 w-full text-center h-40">Loading.....</p>}
+          
         </section>
       </div>
-    </div>
     </Navbar>
-    
   );
 }

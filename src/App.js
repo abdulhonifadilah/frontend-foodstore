@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import Homepage from "./pages/homepage";
 import Cart from "./pages/cart";
-import Navbar from "./components/nav";
 import Profil from "./pages/profil";
 import Login from "./pages/login";
 import Register from "./pages/register";
@@ -33,7 +32,6 @@ function App() {
 
   return (
     <div style={{ backgroundColor: "#C4DCC2", minHeight: "100vh" }}>
-      {/* {(role==='user' || !loggedIn) && <Navbar />} */}
       <Routes>
         <Route
           element={

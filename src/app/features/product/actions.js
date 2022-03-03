@@ -15,6 +15,8 @@ import axios from "axios";
 
 export const getProducts = (params) => async (dispatch) => {
   try {
+    dispatch({ type: LOADING });
+
     let filter = `q=${params.name}&category=${params.category}`;
     params.tags.map((e) => (filter += `&tags=${e}`));
     const res = await axios.get(`https://backend-foodstore.herokuapp.com/api/product?${filter}`);
@@ -22,6 +24,7 @@ export const getProducts = (params) => async (dispatch) => {
       type: GET_PRODUCT,
       payload: res.data.data,
     });
+    dispatch({ type: SUCCESS });
   } catch (err) {
     console.log(err);
   }
