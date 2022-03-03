@@ -38,7 +38,7 @@ export default function Profil() {
   useEffect(() => {
     dispatch(getInvoices());
     dispatch(getAddresses());
-  }, [])
+  }, [dispatch])
   
 
   const handleLogout = () => {
