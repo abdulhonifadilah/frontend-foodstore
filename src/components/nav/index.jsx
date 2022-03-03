@@ -9,7 +9,7 @@ export default function Navbar(props) {
   let dispatch = useDispatch();
   let cart = useSelector((state) => state.cart);
   useEffect(() => {
-    dispatch(getToCart());
+    // dispatch(getToCart());
   }, [dispatch]);
   return (
     <div className="w-full min-h-screen flex flex-col justify-between">

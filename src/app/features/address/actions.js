@@ -18,7 +18,7 @@ export const getAddresses = () => async (dispatch) => {
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
     await axios
-      .get("http://localhost:3000/api/delivery-addresses", {
+      .get("https://backend-foodstore.herokuapp.com/api/delivery-addresses", {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -40,7 +40,7 @@ export const createAddresses = (data) => {
     dispatch({type:LOADING})
     let {token} = localStorage.getItem("auth") ? JSON.parse(localStorage.getItem('auth')) : {};
 
-    await axios.post('http://localhost:3000/api/delivery-addresses', data, {
+    await axios.post('https://backend-foodstore.herokuapp.com/api/delivery-addresses', data, {
         headers: {
             authorization : `Bearer ${token}`
         }
@@ -65,7 +65,7 @@ export const updateAddresses = (id, form) => {
 
       let {token} = localStorage.getItem("auth") ? JSON.parse(localStorage.getItem('auth')) : {};
   
-      await axios.put(`http://localhost:3000/api/delivery-addresses/${id}`, form, {
+      await axios.put(`https://backend-foodstore.herokuapp.com/api/delivery-addresses/${id}`, form, {
           headers: {
               authorization : `Bearer ${token}`
           }
@@ -89,7 +89,7 @@ export const deleteAddresses=(id)=>async(dispatch)=>{
     
   let {token} = localStorage.getItem("auth") ? JSON.parse(localStorage.getItem('auth')) : {};
   
-      await axios.delete(`http://localhost:3000/api/delivery-addresses/${id}`, {
+      await axios.delete(`https://backend-foodstore.herokuapp.com/api/delivery-addresses/${id}`, {
           headers: {
               authorization : `Bearer ${token}`
           }

@@ -18,13 +18,13 @@ export default function Homepage() {
   let { tag, data, form, pagination } = useSelector((state) => state.product);
   const getProduct = useCallback(() => {
     dispatch(getProducts(form));
+    dispatch(getCategories());
+    dispatch(getTags());
   }, [dispatch, form]);
 
   useEffect(() => {
     getProduct();
-    dispatch(getCategories());
-    dispatch(getTags());
-  }, [dispatch, form, getProduct]);
+  }, [getProduct]);
   const totalData = data.length; //panjang data seluruhnya
   const lastPost = pagination.currentPage * pagination.postPerPage;
   const firstPost = lastPost - pagination.postPerPage;
