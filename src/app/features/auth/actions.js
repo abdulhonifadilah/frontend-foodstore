@@ -13,9 +13,6 @@ export const userLogin = (payload) => ({
 
 export const userLoggedIn = (form) => {
   return async (dispatch) => {
-    let data = new FormData();
-    data.append("email", form.email);
-    data.append("password", form.password);
     await axios
       .post("https://backend-foodstore.herokuapp.com/auth/login", form
       ).then((res) => {

@@ -67,19 +67,19 @@ export default function Register() {
         <form onSubmit={handleSubmit} action="" className="flex flex-col px-3 py-5">
           <label htmlFor="">Nama Lengkap</label>
           <input
-            onChange={(e) => form.full_name = e.target.value}
+            onChange={(e) => form.full_name = e.target.value.toLowerCase()}
             type="text"
             className="w-full border-2 border-gray-600 mb-2 focus:outline-gray-800 p-1 rounded-md"
           />
           <label htmlFor="">Email</label>
           <input
-            onChange={(e) => form.email = e.target.value}
+            onChange={(e) => form.email = e.target.value.toLowerCase()}
             type="text"
             className="w-full border-2 border-gray-600 mb-2 focus:outline-gray-800 p-1 rounded-md"
           />
           <label htmlFor="">Password</label>
           <input
-            onChange={(e) => form.password = e.target.value}
+            onChange={(e) => form.password = e.target.value.toLowerCase()}
             type="password"
             className="w-full border-2 border-gray-600 mb-4 focus:outline-gray-800 p-1 rounded-md"
           />

@@ -31,13 +31,13 @@ export default function Login() {
         <form onSubmit={handleLogin} className="flex flex-col px-3 py-5">
           <label htmlFor="">Email</label>
           <input
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.toLowerCase())}
             type="text"
             className="w-full border-2 border-gray-600 mb-2 focus:outline-gray-800 p-1 rounded-md"
           />
           <label htmlFor="">Password</label>
           <input
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value.toLowerCase())}
             type="password"
             className="w-full border-2 border-gray-600 mb-4 focus:outline-gray-800 p-1 rounded-md"
           />
