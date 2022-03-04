@@ -21,6 +21,7 @@ export const createOrders = (data) => {
       })
       .then(() => {
         window.alert("success");
+        window.location.reload();
         dispatch({ type: SUCCESS });
       })
       .catch((err) => console.log(err));
