@@ -27,7 +27,7 @@ export default function Register() {
     let rules = {
       full_name: "required",
       email: "required|email",
-      password: "required|min:8",
+      password: "required|min:6",
     };
 
     let validation = new Validator(form, rules, {

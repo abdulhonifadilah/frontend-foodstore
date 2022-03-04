@@ -39,15 +39,8 @@ export const userRegister = (form) => {
     dispatch({
       type: REQUEST_REGISTER,
     });
-    console.log(form);
-    let data = new FormData();
-    data.append("full_name", form.full_name);
-    data.append("email", form.email);
-    data.append("password", form.password);
     await axios
-      .post("https://backend-foodstore.herokuapp.com/auth/register", data, {
-        headers: { "content-type": "multipart/form-data" },
-      })
+      .post("https://backend-foodstore.herokuapp.com/auth/register", form)
       .then(() => {
         dispatch({
           type: USER_REGISTER,
