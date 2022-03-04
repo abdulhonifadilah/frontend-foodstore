@@ -15,6 +15,7 @@ export default function Cart() {
   const [Open, setOpen] = useState(false);
   const [detailAddress, setdetailAddress] = useState(false);
   const [detail, setdetail] = useState({ name: "" });
+  let { status } = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(getToCart());
     dispatch(getAddresses());
@@ -23,17 +24,17 @@ export default function Cart() {
     return () => {
       dispatch(getToCart());
     };
-  }, [address.status, dispatch]);
+  }, [cart.loading, dispatch]);
 
   return (
     <Navbar>
       <div className="container">
         <div className="flex justify-center flex-col items-center mt-8 px-4">
           <h3 className="font-bold text-3xl">Cart</h3>
-          {cart.data.length > 0 ? (
-            <div
-              className={`flex flex-col mt-6 ${!cart.status && "cursor-wait"}`}
-            >
+          {!status ? 
+            <p className="mt-6 w-full text-center h-40">Loading.....</p>
+           : (cart.data.length  ? (
+            <div className={`flex flex-col mt-6`}>
               {cart.data.map((e, i) => {
                 return (
                   <div className="w-full" key={i}>
@@ -41,7 +42,7 @@ export default function Cart() {
                   </div>
                 );
               })}
-              <div className="flex justify-start mt-3 gap-2">
+              <div className="flex justify-start mt-3 gap-2 mb-2">
                 <div className="text-right w-1/4">
                   <div className="relative flex-col bg-gray-100 rounded-sm">
                     <div className="border flex items-center justify-end rounded">
@@ -127,9 +128,8 @@ export default function Cart() {
                 onClick={() => dispatch(createOrders(order.form))}
               />
             </div>
-          ) : (
-            <p className="mt-3 text-red-500 underline">Tidak ada pesanan</p>
-          )}
+          ) : <p className="mt-3 text-red-500 underline">Tidak ada pesanan</p>)
+          }
         </div>
       </div>
     </Navbar>

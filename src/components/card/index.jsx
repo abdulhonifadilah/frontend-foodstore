@@ -1,35 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getToCart } from "../../app/features/cart/actions";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../app/features/cart/actions";
 
 export default function Card(data) {
   const dispatch = useDispatch();
-  const [view, setView] = useState(false)
   let val = data.data;
-  const handlePlus = () => {
+  const handlePlus = (e) => {
+    e.preventDefault();
     dispatch(addToCart({ product: val, qty: 1 }));
-    // console.log(val);
   };
-  let cart = useSelector((state) => state.cart);
-  useEffect(() => {
-    dispatch(getToCart());
-  }, [cart.data, dispatch, val.name]);
-
-
-  // useEffect(() => {
-  //   cart.data.filter((e)=>e.name === val.name && setView(true))
-  // }, [cart.data, val.name])
-  
-  
-
-
+let {status}= useSelector(state=>state.cart)
   return (
     <>
-      <div className="w-52 h-72 flex flex-col justify-between bg-white rounded overflow-hidden shadow-md">
-        {view && <div className="absolute bg-gray-200 w-52 h-72 text-center items-center bg-opacity-50">
-          <p className="mt-20 font-bold text-xl">Sudah masuk ke keranjang</p>
-        </div>}
-        
+      <div className={`${status && 'cursor-progress'} w-52 h-72 flex flex-col justify-between bg-white rounded overflow-hidden shadow-md`}>
+        {/* <div className="absolute w-52 bg-gray-500 bg-opacity-50 justify-center items-center text-center py-10"><p className="my-auto h-full">loading</p></div> */}
         <div className="header">
           <img
             src={`https://backend-foodstore.herokuapp.com/images/products/${val.image_url}`}
@@ -48,7 +33,7 @@ export default function Card(data) {
         </div>
         <button
           onClick={handlePlus}
-          className="bg-red-500 py-1 font-bold text-lg text-white hover:opacity-90"
+          className={`${status && 'cursor-progress'} bg-red-500 py-1 font-bold text-lg text-white hover:opacity-90`}
         >
           Pesan
         </button>

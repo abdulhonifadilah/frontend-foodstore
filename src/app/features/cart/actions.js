@@ -1,13 +1,15 @@
 import axios from "axios";
-import { ADD_CART, GET_CART, LOADING, SUCCESS } from "./constants";
+import { ADD_CART, GET_CART, LOADING_CART, SUCCESS_CART } from "./constants";
 
 export const addToCart = (data) => async (dispatch) => {
   try {
     const cart = [];
+    dispatch({
+      type: LOADING_CART,
+    });
     let { token } = localStorage.getItem("auth")
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
-    dispatch({ type: LOADING });
     cart.push(data);
     await axios
       .put(
@@ -25,9 +27,16 @@ export const addToCart = (data) => async (dispatch) => {
           type: ADD_CART,
           payload: res.data,
         });
-        dispatch({ type: SUCCESS });
+        dispatch({
+          type: SUCCESS_CART,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: SUCCESS_CART,
+        });
+      });
   } catch (err) {
     console.log(err);
   }
@@ -37,7 +46,6 @@ export const getToCart = () => async (dispatch) => {
   let { token } = localStorage.getItem("auth")
     ? JSON.parse(localStorage.getItem("auth"))
     : {};
-
   await axios
     .get(`https://backend-foodstore.herokuapp.com/api/carts`, {
       headers: {
@@ -49,6 +57,9 @@ export const getToCart = () => async (dispatch) => {
         type: GET_CART,
         payload: res,
       });
+      // dispatch({
+      //   type: SUCCESS_CART,
+      // });
     })
     .catch((err) => console.log(err));
 };

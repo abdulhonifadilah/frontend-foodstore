@@ -23,7 +23,7 @@ export default function Invoice() {
           </tr>
         </thead>
         <tbody className="border-b">
-          {invoice.length > 0 && invoice.map((e, i) => {
+          {invoice.data.length > 0 && invoice.data.map((e, i) => {
             return (
               <tr key={i}>
                 <td>
@@ -69,6 +69,7 @@ export default function Invoice() {
           </tbody>
         </table>
       )}
+      {!invoice.status &&<p className="mt-6 w-full text-center h-40">Loading.....</p>}
     </div>
   );
 }

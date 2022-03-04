@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getToCart } from "../../app/features/cart/actions";
 import Footer from "../footer";
 
 export default function Navbar(props) {
   const { loggedIn } = useSelector((state) => state.auth);
   let cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getToCart());
+  }, [dispatch])
+  
   return (
     <>
       <div className="w-full min-h-screen flex flex-col container">

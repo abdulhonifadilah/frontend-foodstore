@@ -1,7 +1,7 @@
 import { GET_INVOICE, LOADING, SET_FORM_ORDER, SUCCESS, GET_ORDER } from "./constans";
 
 let initialState = {
-  invoice: [],
+  invoice: {data:[], status:false},
   order:{data:[], status:false},
   status: false,
   form:{
@@ -33,7 +33,7 @@ export default function orderReducer(state = initialState, { type, payload,formT
     case GET_INVOICE:
       return {
         ...state,
-        invoice: payload,
+        invoice: {data:payload, status:true},
       };
       case GET_ORDER:
         return{

@@ -1,9 +1,9 @@
-import { ADD_CART, GET_CART, LOADING, SUCCESS } from "./constants";
+import { ADD_CART, GET_CART, LOADING_CART, SUCCESS_CART } from "./constants";
 
 let initialState = {
   data: [],
   status: false,
-  
+  loading:true,
 };
 
 export default function cartReducer(state = initialState, { type, payload }) {
@@ -17,16 +17,17 @@ export default function cartReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         data: payload.data,
+        status:true
       }
-      case LOADING:
+      case LOADING_CART:
         return{
           ...state,
-          status: false,
+          loading: true,
         }
-        case SUCCESS:
+        case SUCCESS_CART:
           return{
             ...state,
-            status:true
+            loading:false
           }
     default:
       return state;
