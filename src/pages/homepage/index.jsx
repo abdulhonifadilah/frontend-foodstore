@@ -83,7 +83,7 @@ export default function Homepage() {
           {status ? <>
           {data.length ? (
             <>
-              <div className="mt-6 flex flex-col md:flex-row justify-start mb-2 w-full">
+              <div className="mt-6 flex flex-col md:flex-row justify-start mb-2 w-full flex-wrap">
                 {data.slice(firstPost, lastPost).map((e, i) => {
                   return (
                     <div

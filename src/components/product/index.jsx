@@ -35,7 +35,7 @@ export default function TabelProduct() {
     e.tags.map((e)=> setTags.push(e.name))
     dispatch(setForm("name", e.name));
     dispatch(
-      setImagePreview(`https://backend-foodstore.herokuapp.com/images/products/${e.image_url}`)
+      setImagePreview(`http://localhost:3000/images/products/${e.image_url}`)
     );
     dispatch(setForm("description", e.description));
     dispatch(setForm("category", e.category.name));
@@ -73,7 +73,7 @@ export default function TabelProduct() {
                 <td className="flex justify-center py-1">
                   <img
                     className="w-14"
-                    src={`https://backend-foodstore.herokuapp.com/images/products/${e.image_url}`}
+                    src={`http://localhost:3000/images/products/${e.image_url}`}
                     alt=""
                   />
                 </td>

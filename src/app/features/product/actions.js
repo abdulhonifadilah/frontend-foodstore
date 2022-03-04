@@ -59,7 +59,7 @@ export const createProduct = (form) => async (dispatch) => {
     }
 
     await axios
-      .post("https://backend-foodstore.herokuapp.com/api/product", data, {
+      .post("http://localhost:3000/api/product", data, {
         headers: {
           "content-type": "multipart/form-data",
           authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ export const updateProduct = (id, form) => async (dispatch) => {
       data.append("tags", form.tags[i]);
     }
     await axios
-      .put(`https://backend-foodstore.herokuapp.com/api/product/${id}`, data, {
+      .put(`http://localhost:3000/api/product/${id}`, data, {
         headers: {
           "content-type": "multipart/form-data",
           authorization: `Bearer ${token}`,
