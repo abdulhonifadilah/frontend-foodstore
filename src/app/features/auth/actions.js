@@ -45,6 +45,7 @@ export const userRegister = (form) => {
         dispatch({
           type: USER_REGISTER,
         });
+        window.alert("success");
         window.location.reload();
       })
       .catch((err) => console.log(err));
