@@ -12,6 +12,12 @@ export default function Navbar(props) {
   useEffect(() => {
     dispatch(getToCart());
   }, [dispatch])
+  useEffect(() => {
+    return () => {
+      dispatch(getToCart());
+    }
+  }, [cart.loading, dispatch])
+  
   
   return (
     <>

@@ -12,15 +12,15 @@ export default function Card(data) {
   const handlePlus = (e) => {
     e.preventDefault();
     if (!loggedIn) {
-      navigate("/");
+      navigate("/login");
     }else{
       dispatch(addToCart({ product: val, qty: 1 }));
     }
   };
-let {status}= useSelector(state=>state.cart)
+let {loading}= useSelector(state=>state.cart)
   return (
     <>
-      <div className={`${status && 'cursor-progress'} w-52 h-72 flex flex-col justify-between bg-white rounded overflow-hidden shadow-md`}>
+      <div className={`${loading && 'cursor-progress'} w-52 h-72 flex flex-col justify-between bg-white rounded overflow-hidden shadow-md`}>
         <div className="header">
           <img
             src={`https://backend-foodstore.herokuapp.com/images/products/${val.image_url}`}
@@ -39,7 +39,7 @@ let {status}= useSelector(state=>state.cart)
         </div>
         <button
           onClick={handlePlus}
-          className={`${status && 'cursor-progress'} bg-red-500 py-1 font-bold text-lg text-white hover:opacity-90`}
+          className={`${loading && 'cursor-progress'} bg-red-500 py-1 font-bold text-lg text-white hover:opacity-90`}
         >
           Pesan
         </button>
