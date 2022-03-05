@@ -10,6 +10,8 @@ import {
   SET_FORM_DEFAULT,
   SET_PAGINATION,
   FILTER_PRODUCT,
+  OPEN_DETAIL,
+  CLOSE_DETAIL,
 } from "./constants";
 import axios from "axios";
 
@@ -17,7 +19,7 @@ export const getProducts = (params) => async (dispatch) => {
   try {
     dispatch({ type: LOADING });
 
-    let filter = `q=${params.name}&category=${params.category}`;
+    let filter = `category=${params.category}`;
     params.tags.map((e) => (filter += `&tags=${e}`));
     const res = await axios.get(`https://backend-foodstore.herokuapp.com/api/product?${filter}`);
     dispatch({
@@ -131,6 +133,13 @@ export const deleteProduct = (id) => async (dispatch) => {
     console.log(err);
   }
 };
+
+export const openDetail = (data)=>{
+  return{type:OPEN_DETAIL, payload:data}
+}
+export const closeDetail = ()=>{
+  return{type:CLOSE_DETAIL}
+}
 
 export const setForm = (formType, formValue) => {
   return { type: SET_FORM, formType, formValue };

@@ -11,6 +11,8 @@ import {
   SET_ID,
   SET_FORM_DEFAULT,
   SET_PAGINATION,
+  OPEN_DETAIL,
+  CLOSE_DETAIL,
 } from "./constants";
 
 let initialState = {
@@ -30,6 +32,7 @@ let initialState = {
     tags: [],
     image: "",
   },
+  detail: { status: false, data:{}},
   imagePreview: "",
   pagination: { totalPage: 0, postPerPage: 10,currentPage:1, lastPost: 0, firstPost: 0 },
   error: false,
@@ -107,6 +110,24 @@ export default function productReducer(
         },
         imagePreview: "",
       };
+      case OPEN_DETAIL:
+        return{
+          ...state,
+          detail:{
+            ...state.detail,
+            status: true,
+            data:payload,
+          }
+        }
+        case CLOSE_DETAIL:
+        return{
+          ...state,
+          detail:{
+            ...state.detail,
+            status: false,
+            data:{},
+          }
+        }
     case LOADING:
       return { ...state, status: false };
     case SUCCESS:

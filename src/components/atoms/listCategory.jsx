@@ -8,7 +8,7 @@ export default function ListCategory() {
   const dispatch = useDispatch();
   return (
     <Fragment>
-      <div className="text-right w-40">
+      <div className="text-right w-40 z-10">
         <div className="relative flex-col bg-gray-100 rounded-sm">
           <div className="border flex items-center justify-end rounded">
             <button

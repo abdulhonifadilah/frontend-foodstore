@@ -13,3 +13,5 @@ export const IMAGE_PREVIEW = 'IMAGE_PREVIEW';
 export const SET_ID='SET_ID';
 export const SET_FORM_DEFAULT= 'SET_FORM_DEFAULT';
 export const SET_PAGINATION = 'SET_PAGINATION';
+export const OPEN_DETAIL = 'OPEN_DETAIL';
+export const CLOSE_DETAIL = 'CLOSE_DETAIL';
